@@ -1,7 +1,9 @@
 name 'bazaar'
-maintainer 'The Authors'
-maintainer_email 'you@example.com'
+maintainer 'Paul Mitchell'
+maintainer_email 'pauldmitchell28@gmail.com'
 license 'all_rights'
-description 'Installs/Configures bazaar'
-long_description 'Installs/Configures bazaar'
+description 'Bazaar version control system'
+long_description 'Use the Bazaar version control setup to checkout update and pull software'
 version '0.1.0'
+
+depends 'apt'
