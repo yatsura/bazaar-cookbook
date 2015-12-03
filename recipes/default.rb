@@ -8,3 +8,5 @@ include_recipe 'apt'
 package 'bzr' do
   action :install
 end
+
+bazaar node['bazaar']['location']
