@@ -1,0 +1,20 @@
+---
+driver:
+  name: vagrant
+
+provisioner:
+  name: chef_zero
+  data_path: test/integration/fixtures
+
+platforms:
+  - name: ubuntu-14.04
+
+suites:
+  - name: default
+    run_list:
+      - recipe[bazaar::default]
+    attributes:
+
+  - name: lwrps
+    run_list:
+      - recipe[bazaar_test::lwrps]
