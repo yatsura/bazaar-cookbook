@@ -14,3 +14,7 @@ suites:
     run_list:
       - recipe[bazaar::default]
     attributes:
+
+  - name: lwrps
+    run_list:
+      - recipe[bazaar_test::lwrps]

@@ -34,7 +34,11 @@ end
 
 def bazaar_checkout
   checkoutString = "bzr checkout -rtag:#{@current_resource.tag} #{@current_resource.branch} #{@current_resource.location}"
-  converge_by("Command: #{checkoutstring}") do
+  converge_by("Command: #{checkoutString}") do
     execute checkoutString
   end
+end
+
+def already_checked_out
+  false
 end

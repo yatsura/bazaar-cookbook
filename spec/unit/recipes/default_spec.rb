@@ -11,9 +11,5 @@ describe_recipe 'bazaar::default' do
     it 'installs bzr' do
       expect(chef_run).to install_bzr
     end
-
-    it 'uses the bazaar resource to checkout' do
-      expect(chef_run).to checkout_with_bazaar(branch)
-    end
   end
 end

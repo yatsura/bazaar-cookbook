@@ -1,4 +1,3 @@
-resource_name :bazaar
 actions :checkout, :update
 
 default_action :checkout
