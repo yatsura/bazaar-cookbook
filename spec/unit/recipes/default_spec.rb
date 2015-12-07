@@ -13,7 +13,7 @@ describe_recipe 'bazaar::default' do
     end
 
     it 'uses the bazaar resource to checkout' do
-      expect(chef_run).to checkout_with_bazaar(location)
+      expect(chef_run).to checkout_with_bazaar(branch)
     end
   end
 end

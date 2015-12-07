@@ -9,4 +9,4 @@ package 'bzr' do
   action :install
 end
 
-bazaar node['bazaar']['location']
+bazaar node['bazaar']['branch']
