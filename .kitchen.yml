@@ -10,11 +10,9 @@ platforms:
   - name: ubuntu-14.04
 
 suites:
-  - name: default
+  - name: checkout
     run_list:
-      - recipe[bazaar::default]
-    attributes:
-
-  - name: lwrps
+      - recipe[bazaar_test::checkout]
+  - name: update
     run_list:
-      - recipe[bazaar_test::lwrps]
+      - recipe[bazaar_test::update]
