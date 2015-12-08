@@ -8,7 +8,14 @@ tar_extract 'file://./tmp/kitchen/data/repo.tar.gz' do
   creates '/tmp/branch/repo'
 end
 
-directory '/tmp/location'
+directory '/tmp/location' do
+  recursive true
+  action :delete
+end
+
+directory '/tmp/location' do
+  action :create
+end
 
 bazaar '1.0' do
   branch '/tmp/branch/repo'

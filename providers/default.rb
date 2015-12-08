@@ -19,7 +19,7 @@ action :checkout do
 end
 
 action :update do
-  Chef::Log.info "Not done this yet!"
+  bazaar_update
 end
 
 def load_current_resource
@@ -34,6 +34,13 @@ end
 
 def bazaar_checkout
   checkoutString = "bzr checkout -rtag:#{@current_resource.tag} #{@current_resource.branch} #{@current_resource.location}"
+  converge_by("Command: #{checkoutString}") do
+    execute checkoutString
+  end
+end
+
+def bazaar_update
+  checkoutString = "bzr update -rtag:#{@current_resource.tag} #{@current_resource.location}"
   converge_by("Command: #{checkoutString}") do
     execute checkoutString
   end
