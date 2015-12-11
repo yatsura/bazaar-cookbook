@@ -19,7 +19,7 @@
 
 require_relative './spec_helper'
 
-describe 'bazaar_test::lwrps' do
+describe 'bazaar_test::checkout' do
   context 'tag 1.0 checkout' do
     let(:location) { '/tmp/location/1.0' }
 
