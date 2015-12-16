@@ -1,13 +1,21 @@
-require 'pry'
 require 'spec_helper'
 
-describe "Default Provider" do
-  let(:provider) { Chef::Provider::Bazaar.new('location') }
+describe "bazaar_test::default" do
+  let(:chef_run) {
+    ChefSpec::SoloRunner.new(
+      platform: 'ubuntu',
+      version: '14.04',
+      step_into: 'bazaar'
+    ).converge("bazaar_test::default")
+  }
 
   context "checkout" do
-    it "should execute bazaar" do
-      binding.pry
-      expect(provider).to receive(:execute).with("hello world")
+    it "should execute" do
+      expect(chef_run).to checkout_bazaar_repo('/repo')
+    end
+
+    it "should execute bzr" do
+      expect(chef_run).to checkout_with_bazaar('/repo', tag: '1.0', to: '/1.0')
     end
   end
 end
