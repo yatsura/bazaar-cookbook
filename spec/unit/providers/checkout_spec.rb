@@ -6,7 +6,7 @@ describe "bazaar_test::default" do
       platform: 'ubuntu',
       version: '14.04',
       step_into: 'bazaar'
-    ).converge("bazaar_test::default")
+    ).converge("bazaar_test::checkout_unit")
   }
 
   context "checkout" do
