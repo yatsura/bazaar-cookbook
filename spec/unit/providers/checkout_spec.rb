@@ -10,7 +10,7 @@ describe "bazaar_test::default" do
   }
 
   context "checkout" do
-    it "should execute" do
+    it "access the repository" do
       expect(chef_run).to checkout_bazaar_repo('/repo')
     end
 
