@@ -11,6 +11,9 @@ if defined?(ChefSpec)
     ChefSpec::Matchers::ResourceMatcher.new(:bazaar, :update, location)
   end
 
+  def checkout_to_location(location)
+    ChefSpec::Matchers::ResourceMatcher.new(:bazaar, :checkout, location)
+  end
   def checkout_with_bazaar(repo, args={})
     tag = args.delete(:tag)
     loc = args.delete(:to)

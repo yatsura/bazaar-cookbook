@@ -11,7 +11,7 @@ describe "bazaar_test::default" do
 
   context "checkout" do
     it "access the repository" do
-      expect(chef_run).to checkout_bazaar_repo('/repo')
+      expect(chef_run).to checkout_to_location('/1.0')
     end
 
     it "should execute bzr" do
