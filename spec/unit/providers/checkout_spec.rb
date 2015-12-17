@@ -6,12 +6,12 @@ describe "bazaar_test::default" do
       platform: 'ubuntu',
       version: '14.04',
       step_into: 'bazaar'
-    ).converge("bazaar_test::default")
+    ).converge("bazaar_test::checkout_unit")
   }
 
   context "checkout" do
-    it "should execute" do
-      expect(chef_run).to checkout_bazaar_repo('/repo')
+    it "access the repository" do
+      expect(chef_run).to checkout_to_location('/1.0')
     end
 
     it "should execute bzr" do
