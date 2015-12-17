@@ -1,6 +1,6 @@
-actions :checkout, :update
+actions :checkout, :update, :sync
 
-default_action :checkout
+default_action :sync
 
 attribute :location, kind_of: String, required: true, name_attribute: true
 attribute :repository, kind_of: String, required: true

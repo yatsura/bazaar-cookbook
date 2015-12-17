@@ -39,7 +39,3 @@ def bazaar_update
     execute checkoutString
   end
 end
-
-def already_checked_out
-  false
-end
