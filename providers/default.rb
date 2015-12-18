@@ -53,20 +53,27 @@ def bazaar_update
 end
 
 def resource_exists?
-  false
+  Dir.exist? @new_resource.location + '/.bzr'
 end
 
 def load_version_info(location)
-  cmd = Mixlib::ShellOut.new("bzr version-info --template=\"{last_revision: '{date}', clean: {clean}, revno: {revno}, revision_id: '{revision_id}', branch_nick: '{branch_nick}'}\n\" --custom #{location}")
+  cmd = Mixlib::ShellOut.new("bzr version-info --template=\"{last_revision: '{date}', clean: {clean}, revno: {revno}, revision_id: '{revision_id}', branch_nick: '{branch_nick}'}\n\" --custom",
+                             cwd: location)
   cmd.run_command
   cmd.error!
   @version_info = eval cmd.stdout
 end
 
-def load_tags
-  cmd = Mixlib::ShellOut.new("bzr tags #{location}")
+def load_tags(location)
+  cmd = Mixlib::ShellOut.new("bzr tags", cwd: location)
   cmd.run_command
   cmd.error!
-  proc = Proc.new { |a| a.split(/\s/).reverse }
-  @tags = Hash[cmd.o.split("\n").collect(&p)]
+  proc = Proc.new { |a| a.split(/\s+/).reverse }
+  for_hash = cmd.stdout.split("\n").collect(&proc)
+  if for_hash.count.odd?
+    Chef::Log.warn("Odd number of tags: #{cmd.stdout}")
+    @tag = Hash.new
+  else
+    @tags = Hash[for_hash]
+  end
 end

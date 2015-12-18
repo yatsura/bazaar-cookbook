@@ -10,6 +10,9 @@ platforms:
   - name: ubuntu-14.04
 
 suites:
-  - name: Integration
+  - name: default
     run_list:
       - recipe[bazaar_test::default]
+      - recipe[bazaar_test::checkout]
+      - recipe[bazaar_test::update]
+      - recipe[bazaar_test::sync]
