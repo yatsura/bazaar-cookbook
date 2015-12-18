@@ -1,4 +1,6 @@
-require 'spec_helper'
+require 'serverspec'
+
+set :backend, :exec
 
 describe 'bazaar::default' do
   # Serverspec examples can be found at
