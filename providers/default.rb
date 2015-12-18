@@ -20,10 +20,22 @@ action :update do
   end
 end
 
+action :sync do
+  if resource_exists?
+    bazaar_update
+  else
+    bazaar_checkout
+  end
+end
+
 def load_current_resource
   @current_resource = Chef::Resource::Bazaar.new(@new_resource.location)
-  @current_resource.tag = @new_resource.tag
-  @current_resource.repository = @new_resource.repository
+  if resource_exists?
+    load_version_info @current_resource.location
+    load_tags @current_resource.location
+    if @tags.has_key?(@version_info[:revno])
+    end
+  end
 end
 
 def bazaar_checkout
@@ -37,5 +49,31 @@ def bazaar_update
   checkoutString = "bzr update -rtag:#{@new_resource.tag} #{@new_resource.location}"
   converge_by("Command: #{checkoutString}") do
     execute checkoutString
+  end
+end
+
+def resource_exists?
+  Dir.exist? @new_resource.location + '/.bzr'
+end
+
+def load_version_info(location)
+  cmd = Mixlib::ShellOut.new("bzr version-info --template=\"{last_revision: '{date}', clean: {clean}, revno: {revno}, revision_id: '{revision_id}', branch_nick: '{branch_nick}'}\n\" --custom",
+                             cwd: location)
+  cmd.run_command
+  cmd.error!
+  @version_info = eval cmd.stdout
+end
+
+def load_tags(location)
+  cmd = Mixlib::ShellOut.new("bzr tags", cwd: location)
+  cmd.run_command
+  cmd.error!
+  proc = Proc.new { |a| a.split(/\s+/).reverse }
+  for_hash = cmd.stdout.split("\n").collect(&proc)
+  if for_hash.count.odd?
+    Chef::Log.warn("Odd number of tags: #{cmd.stdout}")
+    @tag = Hash.new
+  else
+    @tags = Hash[for_hash]
   end
 end

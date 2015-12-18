@@ -11,6 +11,10 @@ if defined?(ChefSpec)
     ChefSpec::Matchers::ResourceMatcher.new(:bazaar, :update, location)
   end
 
+  def sync_bazaar_repo(location)
+    ChefSpec::Matchers::ResourceMatcher.new(:bazaar, :sync, location)
+  end
+
   def checkout_to_location(location)
     ChefSpec::Matchers::ResourceMatcher.new(:bazaar, :checkout, location)
   end
