@@ -10,9 +10,6 @@ platforms:
   - name: ubuntu-14.04
 
 suites:
-  - name: checkout
+  - name: Integration
     run_list:
-      - recipe[bazaar_test::checkout]
-  - name: update
-    run_list:
-      - recipe[bazaar_test::update]
+      - recipe[bazaar_test::default]
